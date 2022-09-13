@@ -1,26 +1,33 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+ 
+	const [inputValue, setInputValue] = useState("");
+	const [addTarea, setAddTarea] = useState([]);
+	
+	function listaTareas(e) {
+	if (e.key === "Enter") {
+	setAddTarea([...addTarea, e.target.value]);
+	e.target.value = "";
+	}
+	}
+	console.log(addTarea);
+
+  return (
+    <div className="container">
+		<h1></h1>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          id="formGroupExampleInput"
+          placeholder="What needs to be done?"
+          onKeyDown={listaTareas}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Home;
