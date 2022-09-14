@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-
 //create your first component
 const Home = () => {
-  const [inputValue, setInputValue] = useState("");
+ 
   const [addTarea, setAddTarea] = useState([]);
 
   function listaTareas(e) {
@@ -13,11 +12,11 @@ const Home = () => {
     }
   }
   console.log(addTarea);
-  
-  const DeleteItems = (indexItem) => {
-    setAddTarea((prevState) =>
-      prevState.filter((listaTareas, index) => index !== indexItem)
-    );
+
+  const removeTodo = (index) => {
+    const newTodos = [...addTarea];
+    newTodos.splice(index, 1);
+    setAddTarea(newTodos);
   };
 
   return (
@@ -35,13 +34,15 @@ const Home = () => {
       <div id="lista">
         <div id="pendientes">
           <ul>
-            {addTarea.map((tarea) => (
-              <li>{tarea}
-              <button type="button" className="float-end" onClick={() => DeleteItems(index)} ><i className="bi bi-trash "></i></button> 
+            {addTarea.map((tarea, index) => (
+              <li key={index}>
+                {tarea}
+                <a className="float-end" onClick={() => removeTodo(index)}>
+                  <i className="bi bi-x bg-primary text-white"></i>
+                </a>
               </li>
             ))}
           </ul>
-          
         </div>
       </div>
       <div className="text-center">
